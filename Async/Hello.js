@@ -1,12 +1,23 @@
 //This is async
 
 
-function otherWork() {
-    setTimeout(() => {
-        console.log("We are inside function");
-    }, 5000)
-}
+// function otherWork() {
+//     for (var i = 0; i < 3; i++) {
+//         setTimeout(function() 
+//         { 
+//             console.log(i); 
+//         }, 
+//         1000 + i);
+//       }
+      
+    
+// }
+function A() {
+    var a = b = 5;
+    console.log(a);
+    
+  };
 
-console.log("Start");
-otherWork();
-console.log("End");
+// otherWork();
+
+A();
