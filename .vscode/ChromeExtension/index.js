@@ -1,40 +1,46 @@
-let myLeads = [];
-
+let myLeads = []
 const inputEl = document.getElementById("input-el")
-let inputBtn = document.getElementById('input-btn');
-const ulEl= document.getElementById("ulel");
+const inputBtn = document.getElementById("input-btn")
+const ulEl = document.getElementById("ul-el")
 
-
+// ["lead1", "lead2"] or null
+const deleteBtn = document.getElementById("delete-btn")
 let leadsFromLocalStorage = JSON.parse( localStorage.getItem("myLeads") )
-if(leadsFromLocalStorage) {
-    myLeads = leadsFromLocalStorage;
+console.log(leadsFromLocalStorage)
+// 1. Check if leadsFromLocalStorage is truthy
+// 2. If so, set myLeads to its value and call renderLeads()
+
+if (leadsFromLocalStorage) {
+    myLeads = leadsFromLocalStorage
     renderLeads()
 }
+// 2. Listen for double clicks on the delete button (google it!)
+// 3. When clicked, clear localStorage, myLeads, and the DOM
 
-
- 
-inputBtn.addEventListener("click", function() {
-
-    myLeads.push(inputEl.value)
-    inputEl.value=""
-    localStorage.setItem("myLeads", JSON.stringify(myLeads));
-    renderLeads();
-
+deleteBtn.addEventListener("dblclick", function() {
+    
+    localStorage.clear()
+    myLeads = []
+    renderLeads()
 })
-let listItems =""
+
+inputBtn.addEventListener("click", function() {
+    myLeads.push(inputEl.value)
+    inputEl.value = ""
+    localStorage.setItem("myLeads", JSON.stringify(myLeads) )
+    renderLeads()
+})
 
 function renderLeads() {
-for (let i =0; i<myLeads.length; i++)
-{
-    listItems+= `
-             <li>
+    let listItems = ""
+    for (let i = 0; i < myLeads.length; i++) {
+        listItems += `
+            <li>
                 <a target='_blank' href='${myLeads[i]}'>
                     ${myLeads[i]}
                 </a>
-            </li>`
-    // const ElementList = document.createElement("li");
-    // ElementList.textContent = myLeads[i];
-    // ulEl.append(ElementList)
-}
-ulEl.innerHTML = listItems;
+            </li>
+        `
+    }
+    ulEl.innerHTML = listItems  
 }
